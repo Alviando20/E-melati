@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Jenis Pelayanan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qL4lb8R0qA4YwGRLxlBbjzRDPT+ze7u3UnUtdW9dsQ/JzWgRnY1Ywz1aepLnG2mK"
+        crossorigin="anonymous"></script>
+    <style>
+        .title {
+            width: 100%;
+            height: 50px;
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/bg-image.jpeg');
+            background-position: center;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .background-title {
+            width: 100%;
+            height: 200px;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mytitle {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        .form-input {
+            margin-bottom: 10px;
+        }
+
+        .form-submit {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .delete-button {
+            color: red;
+            cursor: pointer;
+        }
+
+     
+
+        .background-container {
+            height: 400px;
+        }
+
+        .container {
+            width: 95%;
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px gray;
+        }
+    </style>
+    <script>
+        function back_admin() {
+            window.location.href = ('/admin')
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand mb-2" href="#">E-melati</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-1">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" onclick="back_admin()">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="title">
+        <h1>Jenis Pelayanan</h1>
+    </div>
+
+    <div class="background-title">
+        <div class="mytitle">
+            <form action="/add_jenis" method="POST">
+                <div class="form-group">
+                    <input class="form-control" aria-describedby="addon-wrapping" type="text" id="jenis_pelayanan"
+                        name="jenis_pelayanan" required placeholder="Tambah Jenis Pelayanan">
+                </div>
+                <div class="form-submit mt-2 d-flex flex-row-reverse">
+                    <input class="btn btn-primary" type="submit" value="Tambah">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="background-container">
+        <div class="container">
+            <table class="table fixeed-top table-white table-striped" id="table">
+                <thead class="head-light">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Jenis Pelayanan</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                {% for jenis_data in jenis %}
+                <tbody>
+
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <!-- <td>{{ loop.index }}</td> -->
+                        <td>{{ jenis_data.jenis_pelayanan }}</td>
+                        <td>
+                            <form action="/delete_jenis/{{ jenis_data.jenis_pelayanan }}" method="POST">
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                </tbody>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

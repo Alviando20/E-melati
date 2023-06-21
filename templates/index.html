@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <style>
+        .title {
+            width: 100%;
+            height: 50px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/bg-image.jpeg');
+            background-position: center;
+            background-size: cover;
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .navbar {
+            height: 60px;
+        }
+    </style>
+    <script>
+        function back_admin() {
+            window.location.href = ('/admin')
+        }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function refreshPage() {
+            location.reload();
+        }
+        function alart() {
+            var jenisPelayanan = $('#jenis_pelayanan').val();
+            $.ajax({
+                type: 'POST',
+                url: '/change_pelayanan',
+                data: { jenis_pelayanan: jenisPelayanan },
+                success: function (response) {
+                    alert('Jenis Pelayanan berhasil diubah');
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert('Terjadi kesalahan. Silakan coba lagi.');
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand mb-2" href="#">E-melati</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-1">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" onclick="back_admin()">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="title">
+        <h1>Daftar Pasien</h1>
+    </div>
+    <table class="table fixeed-top table-white table-striped" id="table">
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Jenis Kelamin</th>
+                <th scope="col">Usia</th>
+                <th scope="col">Alamat</th>
+                <th scope="col">Nomor HP</th>
+                <th scope="col">Jenis Layanan</th>
+                <th scope="col">Waktu Pelayanan</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        {% for item in data %}
+        <tbody>
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ item.nama_pasien }}</td>
+                <td>{{ item.jenis_kelamin }}</td>
+                <td>{{ item.usia }}</td>
+                <td>{{ item.alamat }}</td>
+                <td>{{ item.nomor_hp }}</td>
+                <td>{{ item.jenis_pelayanan }}</td>
+                <td>{{ item.waktu_pelayanan }}</td>
+                <td>
+                    <button class="btn btn-primary"
+                        onclick="window.location.href='/edit/{{ item.nama_pasien }}'">Edit</button>
+                    <button class="btn btn-danger"
+                        onclick="window.location.href='/delete/{{ item.nama_pasien }}'">Hapus</button>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

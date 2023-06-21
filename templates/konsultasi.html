@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hello Bulma!</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <style>
+            .title {
+                width: 100%;
+                height: 50px;
+
+                background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/bg-image.jpeg');
+                background-position: center;
+                background-size: cover;
+
+                color: white;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .input-group {
+                margin-top: 10px;
+            }
+
+            .mendaftar {
+                text-align: center;
+            }
+
+            .button {
+                margin: 10px;
+            }
+
+            .background-title {
+                width: 100%;
+                height: 500px;
+                color: black;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mytitle {
+                width: 95%;
+                max-width: 500px;
+                margin: 20px auto 0px auto;
+                padding: 20px;
+                box-shadow: 0px 0px 3px 0px gray;
+            }
+
+            .navbar {
+                height: 60px;
+            }
+        </style>
+        <script>
+            function refreshPage() {
+                location.reload();
+            }
+            function alart() {
+                return alert('Selamat Anda Berhasil Mendaftar dan Harap Datang Sesuai Jadwal');
+            }
+
+            function back_client() {
+                window.location.href = ('/')
+            }
+        </script>
+
+    </head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">E-melati</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" onclick="back_client()">Home</a>
+                    </li>
+                 
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="title">
+        <h1 style="text-align: center;">Konsultasi</h1>
+    </div>
+    <div class="background-title">
+        <div class="mytitle">
+            <form method="POST">
+                <div class="mendaftar">
+                    <h2>Silakan Mengisi Form</h2>
+                </div>
+
+                <div class="form">
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="nama_pasien">Nama</label> -->
+                        <span class="input-group-text">Nama</span>
+                        <input type="text" id="nama_pasien" class="form-control" aria-describedby="addon-wrapping"
+                            name="nama_pasien" required>
+                    </div>
+
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="jenis_kelamin">Jenis Kelamin</label> -->
+                        <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
+                            <option value="">Pilih jenis kelamin</option>
+                            <option value="Laki-Laki">Laki-Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="usia">Usia</label> -->
+                        <span class="input-group-text">Usia</span>
+                        <input type="number" class="form-control" aria-describedby="addon-wrapping" id="usia"
+                            name="usia" required>
+                    </div>
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="alamat">Alamat</label> -->
+                        <span class="input-group-text">Keluhan</span>
+                        <textarea name="keluhan" id="" cols="50" rows="5" id="keluhan" name="keluhan" required></textarea>
+                    </div>
+
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="nomor_hp">Nomor HP</label> -->
+                        <span class="input-group-text">Nomor HP</span>
+                        <input type="number" class="form-control" aria-describedby="addon-wrapping" id="nomor_hp"
+                            name="nomor_hp" required>
+                    </div>
+                    <div id="btn-check-dup" style="display: flex; justify-content: center; align-items: center;">
+                        <button class="button is-primary" onclick="alart()">Daftar</button>
+                        <button class="button is-black" onclick="back_client()">Batal</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>

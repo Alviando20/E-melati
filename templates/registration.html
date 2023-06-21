@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hello Bulma!</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+        <script>
+            // Fungsi untuk memuat pilihan jenis pelayanan saat halaman dimuat
+            function loadJenisPelayanan() {
+                // Ambil elemen <select> dengan id "jenis_pelayanan"
+                var selectElement = document.getElementById("jenis_pelayanan");
+
+                // Buat array untuk menyimpan pilihan jenis pelayanan
+                var jenisPelayanan = [];
+
+                // Ambil data jenis pelayanan dari Flask
+                {% for jenis in jenis_pelayanan %}
+                jenisPelayanan.push("{{ jenis }}")
+                {% endfor %}
+
+                // Tambahkan pilihan jenis pelayanan ke elemen <select>
+                for (var i = 0; i < jenisPelayanan.length; i++) {
+                    var option = document.createElement("option");
+                    option.text = jenisPelayanan[i];
+                    selectElement.add(option);
+                }
+            }
+
+            // Panggil fungsi saat halaman dimuat
+            window.onload = loadJenisPelayanan;
+        </script>
+
+        <style>
+            .title {
+                width: 100%;
+                height: 50px;
+
+                background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/bg-image.jpeg');
+                background-position: center;
+                background-size: cover;
+
+                color: white;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .background-title {
+                width: 100%;
+                height: 500px;
+                color: black;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mytitle {
+                width: 95%;
+                max-width: 500px;
+                margin: 20px auto 0px auto;
+                padding: 20px;
+                box-shadow: 0px 0px 3px 0px gray;
+            }
+
+            .input-group {
+                margin-top: 10px;
+            }
+
+            .mendaftar {
+                text-align: center;
+            }
+
+            .button {
+                margin: 10px;
+            }
+
+            .tombol {
+
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .navbar {
+                height: 60px;
+            }
+        </style>
+        <script>
+            function refreshPage() {
+                location.reload();
+            }
+            function alart() {
+                return alert('Selamat Anda Berhasil Mendaftar dan Harap Datang Sesuai Jadwal');
+            }
+            function back_client() {
+                window.location.href = ('/')
+            }
+        </script>
+
+    </head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">E-melati</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" onclick="back_client()">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="title">
+        <h1 style="text-align: center;">Reservasi Rumah Sakit</h1>
+    </div>
+    <div class="background-title">
+        <div class="mytitle">
+            <form method="POST">
+                <div class="mendaftar">
+                    <h2>Silakan Mendaftar</h2>
+                </div>
+                <div class="form">
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="nama_pasien">Nama</label> -->
+                        <span class="input-group-text">Nama</span>
+                        <input type="text" id="nama_pasien" class="form-control" aria-describedby="addon-wrapping"
+                            name="nama_pasien" required>
+                    </div>
+
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="jenis_kelamin">Jenis Kelamin</label> -->
+                        <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
+                            <option value="">Pilih jenis kelamin</option>
+                            <option value="Laki-Laki">Laki-Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="usia">Usia</label> -->
+                        <span class="input-group-text">Usia</span>
+                        <input type="number" class="form-control" aria-describedby="addon-wrapping" id="usia"
+                            name="usia" required>
+                    </div>
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="alamat">Alamat</label> -->
+                        <span class="input-group-text">Alamat</span>
+                        <input type="text" class="form-control" aria-describedby="addon-wrapping" id="alamat"
+                            name="alamat" required>
+                    </div>
+
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="nomor_hp">Nomor HP</label> -->
+                        <span class="input-group-text">Nomor HP</span>
+                        <input type="number" class="form-control" aria-describedby="addon-wrapping" id="nomor_hp"
+                            name="nomor_hp" required>
+                    </div>
+
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="jenis_pelayanan">Jenis Pelayanan</label> -->
+                        <select class="form-select" name="jenis_pelayanan" id="jenis_pelayanan">
+                            <option value="">Pilih jenis pelayanan</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group flex-nowrap">
+                        <!-- <label for="waktu_pelayanan">Waktu Pelayanan</label> -->
+                        <select class="form-select" id="waktu_pelayanan" name="waktu_pelayanan" required>
+                            <option value="">Pilih waktu pelayanan</option>
+                            <option value="07:00">07:00 AM</option>
+                            <option value="08:00">08:00 AM</option>
+                            <option value="09:00">09:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="13:00">01:00 PM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="15:00">03:00 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                            <option value="17:00">05:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="btn-check-dup" style="display: flex; justify-content: center; align-items: center;">
+                    <button class="button is-primary" onclick="alart()">Daftar</button>
+                    <button class="button is-black" onclick="back_client()">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
